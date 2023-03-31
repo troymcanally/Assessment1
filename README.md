@@ -1,5 +1,7 @@
 # Problem Solving and Programming Assessment 1
 
+---
+
 ## Brief
 
 There are two parts to this assignment:
