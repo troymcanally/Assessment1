@@ -3,7 +3,7 @@
 # Author: Troy McAnally
 # Email Id: mcata002@mymail.unisa.edu.au
 # Version: 1.0 31 Mar 2023
-# Description: Petals Around the Rose Guessing Game
+# Description: Assignment 1 - Petals Around the Rose Guessing Game
 # This is my own work as defined by the University's
 # Academic Misconduct policy.
 #
