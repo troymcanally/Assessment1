@@ -66,6 +66,26 @@ def display_dice(player_dice):
     dice.display_dice(player_dice[0], player_dice[1], player_dice[2], player_dice[3], player_dice[4])
 
 
+"""
+The calculate_petals function takes in a list of dice rolls and returns the total number of petals.
+    If there is an even number on any die, it will return None.
+
+:param player_dice: Used to Represent the dice that the player has rolled.
+:return: The total number of petals in the player's dice.
+"""
+def calculate_petals(player_dice):
+    total = 0
+
+    for i in player_dice:
+        if player_dice[i] % 2 != 0:
+            num = player_dice[i] - 1
+            total += num
+        else:
+            return
+    
+    return total
+
+
 # def play_game():
 
 # NOTE: name the dice vairiable player_dice and not dice you idiot!!!!
