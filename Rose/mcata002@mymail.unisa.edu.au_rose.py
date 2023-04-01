@@ -11,82 +11,102 @@
 import random
 import dice
 
-"""
-The introduction function prints the game's introduction and prompts the user to play.
-Calls play_game if yes and prints goodbye message if no
-"""
-def introduction():    
-    greeting = """
-    Petals Around the Rose
-    ----------------------
-    The name of the game is 'Petals Around the Rose'. The name of the
-    game is important. The computer will roll five dice and ask you to
-    guess the score for the roll. The score will always be zero or an
-    even number. Your mission, should you choose to accept it, is to
-    work out how the computer calculates the score. If you succeed in
-    working out the secret and guess correctly three times in a row, you
-    become a Potentate of the Rose.
-    """
+# NOTE: name the dice vairiable player_dice and not dice you idiot!!!
 
-    print(greeting)
-    answer = input("Would you like to play Petals Around the Rose [y|n]?").lower()
 
-    if answer == "n":
+greeting = """
+Petals Around the Rose
+----------------------
+The name of the game is 'Petals Around the Rose'. The name of the
+game is important. The computer will roll five dice and ask you to
+guess the score for the roll. The score will always be zero or an
+even number. Your mission, should you choose to accept it, is to
+work out how the computer calculates the score. If you succeed in
+working out the secret and guess correctly three times in a row, you
+become a Potentate of the Rose.
+"""
+
+print(greeting)
+
+play = ""
+die_count = [0, 0, 0, 0, 0, 0, 0]
+num_of_games = 1
+correct_guess = 0
+incorrect_guess = 0
+
+while play != "y" and play != "n":
+    play = input("Would you like to play Petals Around the Rose [y|n]?").lower()
+
+    if play != "y" and play != "n":
+        print("Please enter either 'y' or 'n'.")
+
+    if play == "n":
         print("No worries... another time perhaps... :)")
-    # else:
-    #     play_game()
+    else:
+        again = ""
+        
+        while again != "n":
+            counter = 0
+            player_dice = [1, 2, 3, 4, 5]
+
+            while counter < 5:
+                num = random.randint(1, 6)
+                die_count[num] += 1
+                player_dice[counter] = num
+                counter += 1
+
+            dice.display_dice(player_dice[0], player_dice[1], player_dice[2], player_dice[3], player_dice[4])
+
+            petals = 0
+
+            for i in player_dice:
+                if i % 2 != 0:
+                    num = i - 1
+                    petals += num
+
+            guess = int(input("Please enter your guess for the roll: "))
+
+            if guess % 2 != 0:
+                print(f"No sorry, it's {petals} not {guess}. The score is always even.")
+                incorrect_guess += 1
+            elif guess == petals:
+                print("Well done! You guessed it!")
+                correct_guess += 1
+            else:
+                print(f"No sorry, it's {petals} not {guess}.")
+                incorrect_guess += 1
+
+            again = input("Roll dice again [y|n]? ").lower()
+
+            if again != "y" and play != "n":
+                print("Please enter either 'y' or 'n'.")
+            elif again == "y":
+                num_of_games += 1
 
 
-"""
-The roll_dice function rolls 5 dice and returns a list of the values.
+        print(f"Game Summary")
+        print(f"============\n")
+        print(f"You played {num_of_games} games:")
+        print(f"  |---> Number of correct guesses:      {correct_guess}")
+        print(f"  |---> Number of incorrect guesses:    {incorrect_guess}\n")
+        print(f"Dice Roll Stats:")
+        print(f"Face    Frequency")
 
-:return: A list of 5 random integers between 1 and 6.
-"""
-def roll_dice():
-    counter = 0
-    dice = [1, 2, 3, 4, 5]
+        count = 1
 
-    while counter < 5:
-        num = random.randint(1, 6)
-        dice[counter] = num
-        counter += 1
+        while count <= 6:
+            asterix = ""
+            asterix_iter = 0
+            print(f"   {count}")
+
+            num_asterix = die_count[count]
+            while asterix_iter < num_asterix:
+                asterix += "*"
+                asterix_iter += 1
+
+            print(f"        {asterix}")
+
+            count += 1
+
+print(("Thanks for playing!"))
     
-    return dice
-
-
-"""
-The display_dice function takes in a list of 5 integers and displays the dice
-    corresponding to those numbers. The function uses the display_dice function from
-    the dice module.
-
-:param player_dice: Used to Pass the dice values to the display_dice function.
-:return: A graphical representation of the dice as ASCII art fom the "dice" module provided.
-"""
-def display_dice(player_dice):
-    dice.display_dice(player_dice[0], player_dice[1], player_dice[2], player_dice[3], player_dice[4])
-
-
-"""
-The calculate_petals function takes in a list of dice rolls and returns the total number of petals.
-    If there is an even number on any die, it will return None.
-
-:param player_dice: Used to Represent the dice that the player has rolled.
-:return: The total number of petals in the player's dice.
-"""
-def calculate_petals(player_dice):
-    total = 0
-
-    for i in player_dice:
-        if player_dice[i] % 2 != 0:
-            num = player_dice[i] - 1
-            total += num
-        else:
-            return
-    
-    return total
-
-
-# def play_game():
-
-# NOTE: name the dice vairiable player_dice and not dice you idiot!!!!
-
