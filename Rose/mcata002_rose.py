@@ -1,7 +1,7 @@
 #
-# File: mcata002@mymail.unisa.edu.au_rose.py
+# File: mcata002_rose.py
 # Author: Troy McAnally
-# Email Id: mcata002@mymail.unisa.edu.au
+# Email Id: mcata002
 # Version: 1.0 31 Mar 2023
 # Description: Assignment 1 - Petals Around the Rose Guessing Game
 # This is my own work as defined by the University's
@@ -11,10 +11,14 @@
 import random
 import dice
 
-# NOTE: name the dice vairiable player_dice and not dice you idiot!!!
-
-
 greeting = """
+File : mcata002_rose.py
+Author : Troy McAnally
+Stud ID : 110406456
+Email ID : mcata002
+This is my own work as defined by the University's Academic Misconduct Policy.
+
+
 Petals Around the Rose
 ----------------------
 The name of the game is 'Petals Around the Rose'. The name of the
