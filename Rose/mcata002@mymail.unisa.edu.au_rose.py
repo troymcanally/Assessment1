@@ -33,9 +33,11 @@ die_count = [0, 0, 0, 0, 0, 0, 0]
 num_of_games = 1
 correct_guess = 0
 incorrect_guess = 0
+incorrect_in_a_row = 0
+correct_in_a_row = 0
 
 while play != "y" and play != "n":
-    play = input("Would you like to play Petals Around the Rose [y|n]?").lower()
+    play = input("Would you like to play Petals Around the Rose [y|n]? ").lower()
 
     if play != "y" and play != "n":
         print("Please enter either 'y' or 'n'.")
@@ -66,19 +68,36 @@ while play != "y" and play != "n":
 
             guess = int(input("Please enter your guess for the roll: "))
 
+            if guess == "":
+                guess = int(input(("Please ensure you enter a guess for the roll: ")))
+
             if guess % 2 != 0:
                 print(f"No sorry, it's {petals} not {guess}. The score is always even.")
                 incorrect_guess += 1
+                correct_in_a_row = 0
+                incorrect_in_a_row += 1
             elif guess == petals:
                 print("Well done! You guessed it!")
                 correct_guess += 1
+                incorrect_in_a_row = 0
+                correct_in_a_row += 1
             else:
                 print(f"No sorry, it's {petals} not {guess}.")
                 incorrect_guess += 1
+                correct_in_a_row = 0
+                incorrect_in_a_row += 1
 
-            again = input("Roll dice again [y|n]? ").lower()
+            if correct_in_a_row == 3:
+                print("Congratulations! You have worked out the secret!")
+                print("Make sure you don't tell anyone!\n")
+                again = "n"
+            elif incorrect_in_a_row == 3:
+                print("Hint: The name of the game is important... Petals Around the Rose.\n")
+                again = "n"
+            else:
+                again = input("Roll dice again [y|n]? ").lower()
 
-            if again != "y" and play != "n":
+            if again != "y" and again != "n":
                 print("Please enter either 'y' or 'n'.")
             elif again == "y":
                 num_of_games += 1
@@ -97,16 +116,16 @@ while play != "y" and play != "n":
         while count <= 6:
             asterix = ""
             asterix_iter = 0
-            print(f"   {count}")
+            
 
             num_asterix = die_count[count]
             while asterix_iter < num_asterix:
                 asterix += "*"
                 asterix_iter += 1
 
-            print(f"        {asterix}")
+            print(f"   {count}    {asterix}")
 
             count += 1
 
-print(("Thanks for playing!"))
+        print(("Thanks for playing!"))
     
